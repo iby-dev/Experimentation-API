@@ -229,3 +229,4 @@ PeopleHR.Data/Database1.tt
 PeopleHR.Data/EF.Reverse.POCO.Core.ttinclude
 PeopleHR.Data/EF.Reverse.POCO.ttinclude
 .idea/
+src/Services/Experimentation/Experimentation.Api/Logs/
