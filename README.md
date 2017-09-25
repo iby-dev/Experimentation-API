@@ -10,7 +10,21 @@ Ofcourse this is just one way to implement a 'Feature-Switching' service, semant
 [Martin Fowlers Blog:](https://martinfowler.com/articles/feature-toggles.html)
 >Feature toggles are a powerful technique, allowing teams to modify system behavior without changing code. They fall into >various usage categories, and it's important to take that categorization into account when implementing and managing toggles. >Toggles introduce complexity. We can keep that complexity in check by using smart toggle implementation practices and >appropriate tools to manage our toggle configuration, but we should also aim to constrain the number of toggles in our system. 
 
-```markdown
-Syntax highlighted code block
+## Tooling
+
+The API was built using the following libraries:
+- Asp.net Core 2.0
+- .net Core 2.0
+- MongoDB
+- Swagger
+- Autofac
+- Serilog
+- Polly
+- NetStandard Library
+
+## Coming Soon?
+
+To make it easier to work with the API i will be uploading a simple nuget package that you can downloaded and add to your internal package repositories whether that is on NEXUS (Sonatype) or TeamServices. The package will sell how the API works and the benefits of using the two together. 
+
 
 
