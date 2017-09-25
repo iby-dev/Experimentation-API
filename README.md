@@ -1,37 +1,16 @@
-## Welcome to GitHub Pages
+## Experimentation API
 
-You can use the [editor on GitHub](https://github.com/iby-dev/Experimentation-API/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+The API provides a RESTful interface over HTTP that makes it easy to dynamically toggle on/off your production code when it starts to fail or is simply exhibiting unexpected behaviour and needs to be taken offline for further analysis. Allowing you the ability to rest easy knowing that you don't have to issue an emergency hotfix. With the API you can make a `HTTPDELETE` request to remove a Feature from the DB and all future requests made to the API will resolve to a `404 Not Found`. Then your clients will stop executing the faulty code and carry on running. 
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+Ofcourse this is just one way to implement a 'Feature-Switching' service, semantically above as described is what makes sense to me but you can integrate and extend the API and consume it however you want.
 
-### Markdown
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+### Feature Switching
+
+[Martin Fowlers Blog:](https://martinfowler.com/articles/feature-toggles.html)
+>Feature toggles are a powerful technique, allowing teams to modify system behavior without changing code. They fall into >various usage categories, and it's important to take that categorization into account when implementing and managing toggles. >Toggles introduce complexity. We can keep that complexity in check by using smart toggle implementation practices and >appropriate tools to manage our toggle configuration, but we should also aim to constrain the number of toggles in our system. 
 
 ```markdown
 Syntax highlighted code block
 
-# Header 1
-## Header 2
-### Header 3
 
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/iby-dev/Experimentation-API/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
