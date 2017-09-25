@@ -26,5 +26,8 @@ The API was built using the following libraries:
 
 To make it easier to work with the API i will be uploading a simple nuget package that you can downloaded and add to your internal package repositories whether that is on NEXUS (Sonatype) or TeamServices. The package will sell how the API works and the benefits of using the two together. 
 
+## Potential Upgrades
 
+1. Caching? - I want to enable client side caching of requests so inside the nuget package that makes the request to the API and then interprets the response from the API. 
+2. Enable Feature Switching by Buckets - This is the next major upgrade I can think - essentially allow entity ids to be associated to a switch to be stored in buckets. i.e User Ids, or Application Ids, Employee Ids or CustomerIds.... whatever you want? 
 
