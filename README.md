@@ -24,7 +24,7 @@ The API was built using the following libraries:
 
 ## Coming Soon?
 
-To make it easier to work with the API i will be uploading a simple nuget package that you can downloaded and add to your internal package repositories whether that is on NEXUS (Sonatype) or TeamServices. The package will sell how the API works and the benefits of using the two together. 
+To make it easier to work with the API i will be uploading a simple nuget package that you can be downloaded and added to your internal package repositories whether that is on NEXUS (Sonatype) or TeamServices. The package will wraps access how the API works and the benefits of using the two together. 
 
 ## Potential Upgrades
 
