@@ -31,3 +31,7 @@ To make it easier to work with the API i will be uploading a simple nuget packag
 1. Caching? - I want to enable client side caching of requests so inside the nuget package that makes the request to the API and then interprets the response from the API. 
 2. Enable Feature Switching by Buckets - This is the next major upgrade I can think - essentially allow entity ids to be associated to a switch to be stored in buckets. i.e User Ids, or Application Ids, Employee Ids or CustomerIds.... whatever you want? 
 
+## The Simple Case For MongoDB
+The api is designed to work with MongoDB - you can however fork the code and choose to work with EFCore if you want but for now MongoDB seemed like a better fit to me. The api does not store structured data or relational data so i thought it might be a good idea to research NoSQL Dbs. With the idea being of storing a simple collection of data that grows vertically in size but not horizontally.
+
+Setup Help: [Stack Overflow Setup Help](https://stackoverflow.com/questions/2438055/how-to-run-mongodb-as-windows-service)
