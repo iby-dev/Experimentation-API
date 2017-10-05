@@ -157,5 +157,66 @@ namespace Experimentation.Api.Controllers
                 return BadRequest(ModelState);
             }
         }
+
+        // BUCKETS CRUD METHOD
+        [HttpGet("{id}/bucket")]
+        public async Task<IActionResult> QueryFeatureByBucket(string id)
+        {
+            var feature = await _director.GetFeatureById(id);
+
+            if (feature == null)
+            {
+                return NotFound();
+            }
+
+            return new OkObjectResult(feature.BucketList);
+        }
+
+        [HttpGet("{id}/bucket/{bucketId}")]
+        public async Task<IActionResult> QueryFeatureByBucket(string id, string bucketId)
+        {
+            var feature = await _director.GetFeatureById(id);
+
+            if (feature == null)
+            {
+                return NotFound();
+            }
+
+            var result = feature.BucketList.Contains(bucketId);
+
+            return new OkObjectResult(result);
+        }
+
+        [HttpPut("{id}/bucket/{bucketId}")]
+        public async Task<IActionResult> AddIdToFeatureBucket(string id, string bucketId)
+        {
+            var feature = await _director.GetFeatureById(id);
+
+            if (feature == null)
+            {
+                return NotFound();
+            }
+
+            feature.BucketList.Add(bucketId);
+
+            await _director.UpdateFeature(feature);
+            return new OkObjectResult("Request processed successfully");
+        }
+
+        [HttpDelete("{id}/bucket/{bucketId}")]
+        public async Task<IActionResult> RemoveIdFromFeatureBucket(string id, string bucketId)
+        {
+            var feature = await _director.GetFeatureById(id);
+
+            if (feature == null)
+            {
+                return NotFound();
+            }
+
+            feature.BucketList.Remove(bucketId);
+
+            await _director.UpdateFeature(feature);
+            return new OkObjectResult("Request processed successfully");
+        }
     }
 }
