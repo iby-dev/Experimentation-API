@@ -14,6 +14,5 @@ namespace Experimentation.Domain.Entities
     {
         string Name { get; set; }
         int FriendlyId { get; set; }
-
     }
 }

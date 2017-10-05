@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Experimentation.Logic.ViewModels
@@ -10,5 +11,7 @@ namespace Experimentation.Logic.ViewModels
 
         [Range(1, int.MaxValue)]
         public int FriendlyId { get; set; }
+
+        public List<string> BucketList { get; set; }
     }
 }

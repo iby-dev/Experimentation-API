@@ -38,8 +38,7 @@ namespace Experimentation.Api.Controllers
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetFeatureByIdAsync(
-            [Required(AllowEmptyStrings = false, 
-            ErrorMessage = "The id parameter cannot be null or contain whitespace.")]
+            [Required(AllowEmptyStrings = false, ErrorMessage = "The id parameter cannot be null or contain whitespace.")]
             string id)
         {
             var feature = await _director.GetFeatureById(id);
@@ -120,6 +119,7 @@ namespace Experimentation.Api.Controllers
 
                 existingFeature.Name = model.Name;
                 existingFeature.FriendlyId = model.FriendlyId;
+                existingFeature.BucketList = model.BucketList;
 
                 await _director.UpdateFeature(existingFeature);
                 return new OkObjectResult("Request processed successfully");

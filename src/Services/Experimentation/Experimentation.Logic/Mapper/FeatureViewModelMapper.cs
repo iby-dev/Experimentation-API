@@ -1,4 +1,5 @@
-﻿using Experimentation.Domain.Entities;
+﻿using System.Collections.Generic;
+using Experimentation.Domain.Entities;
 using Experimentation.Logic.ViewModels;
 
 namespace Experimentation.Logic.Mapper
@@ -10,7 +11,8 @@ namespace Experimentation.Logic.Mapper
             return new Feature
             {
                 Name = model.Name,
-                FriendlyId = model.FriendlyId
+                FriendlyId = model.FriendlyId,
+                BucketList = model.BucketList,
             };
         }
     }
