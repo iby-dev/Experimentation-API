@@ -54,8 +54,8 @@ namespace Experimentation.Api.Controllers
         }
 
         [HttpGet("{friendlyId:int}")]
-        [ValidateActionParameters]
-        public async Task<IActionResult> GetFeatureByFriendlyId([Required] [Range(1, int.MaxValue)] int friendlyId)
+        public async Task<IActionResult> GetFeatureByFriendlyId(
+            [Required] [Range(1, int.MaxValue)] int friendlyId)
         {
             var feature = await _director.GetFeatureByFriendlyId(friendlyId);
 
