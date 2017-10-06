@@ -14,11 +14,13 @@ namespace Experimentation.Api
     {
         // PROPERTIES
         private readonly IConfiguration _configuration;
+        private readonly ILoggerFactory _logFac;
 
         // CONSTRUCTORS
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, ILoggerFactory logFac)
         {
             _configuration = configuration;
+            _logFac = logFac;
         }
 
         // METHODS
@@ -29,6 +31,7 @@ namespace Experimentation.Api
                 {
                     options.Filters.Add(new ValidateActionParameters());
                     options.Filters.Add(new CheckModelState());
+                    options.Filters.Add(new GlobalExceptionFilter(_logFac));
                 })
                 .AddControllersAsServices();
             services.AddOptions();
@@ -40,12 +43,11 @@ namespace Experimentation.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, 
             IHostingEnvironment env, 
-            ILoggerFactory loggerFactory,
             IApplicationLifetime lifetime)
         {
-            loggerFactory.AddConsole(_configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-            loggerFactory.AddSerilog();
+            _logFac.AddSerilog();
+            _logFac.AddConsole(_configuration.GetSection("Logging"));
+            _logFac.AddDebug();
 
             app.UseStaticFiles();
 
