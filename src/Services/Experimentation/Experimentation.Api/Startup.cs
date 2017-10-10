@@ -36,7 +36,7 @@ namespace Experimentation.Api
                 .AddControllersAsServices();
             services.AddOptions();
             services.Configure<DataContextSettings>(_configuration);
-            services.AddSwaggerSupport();
+            services.AddSwaggerSupport(_configuration);
             return services.AddAutofacSupport();
         }
 

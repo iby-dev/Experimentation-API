@@ -6,14 +6,17 @@ using Swashbuckle.Swagger.Model;
 using Experimentation.Configuration.Ioc;
 using Experimentation.Persistence.Ioc;
 using Experimentation.Logic.Ioc;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.PlatformAbstractions;
 
 namespace Experimentation.Api
 {
     public static class StartupExtensions
     {
-        public static IServiceCollection AddSwaggerSupport(this IServiceCollection services)
+        public static IServiceCollection AddSwaggerSupport(this IServiceCollection services, IConfiguration configuration)
         {
+            var pathToDoc = configuration["Swagger:FileName"];
+
             services.AddSwaggerGen();
             services.ConfigureSwaggerGen(options =>
             {
@@ -28,8 +31,8 @@ namespace Experimentation.Api
                 });
 
                 var basePath = PlatformServices.Default.Application.ApplicationBasePath;
-                var xmlPath = Path.Combine(basePath, "Experimentation.Api.xml");
-                options.IncludeXmlComments(xmlPath); ;
+                var xmlPath = Path.Combine(basePath, pathToDoc);
+                options.IncludeXmlComments(xmlPath); 
             });
             return services;
         }
