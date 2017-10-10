@@ -51,8 +51,11 @@ namespace Experimentation.Api
 
             app.UseStaticFiles();
 
+            app.UseSwagger();
+
             app.UseMvc();
-            app.UseSwagger().UseSwaggerUi();
+
+            app.UseSwaggerUi();
 
             app.UseMvcWithDefaultRoute();
 
