@@ -14,12 +14,17 @@ namespace Experimentation.Api
         {
             try
             {
-                var env = $"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}";
+                Log.Information("Firing up the experimentation api...");
+
+                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Prod";
+                Log.Information($"Detected environment is: {env}");
+
+                var envFilePath = $"appsettings.{env}";
 
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{env}.json", optional: true)
+                    .AddJsonFile($"appsettings.{envFilePath}.json", optional: true)
                     .AddEnvironmentVariables()
                     .Build();
 
@@ -46,6 +51,7 @@ namespace Experimentation.Api
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
+                //.UseUrls("http://localhost:811")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()
