@@ -51,7 +51,6 @@ namespace Experimentation.Api
             WebHost.CreateDefaultBuilder(args)
                 .UseKestrel()
                 .UseContentRoot(Directory.GetCurrentDirectory())
-                //.UseUrls("http://localhost:811")
                 .UseIISIntegration()
                 .UseStartup<Startup>()
                 .UseApplicationInsights()

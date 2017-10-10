@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETCOREAPP2_0</DefineConstants>
-    <OutputPath>bin\Debug\netcoreapp2.0\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>bin\Debug\netcoreapp2.0\Experimentation.Api.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
