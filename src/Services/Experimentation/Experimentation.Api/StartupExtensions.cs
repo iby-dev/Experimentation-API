@@ -21,7 +21,6 @@ namespace Experimentation.Api
             {
                 c.SwaggerDoc("v1", new Info
                 {
-                    Contact = new Contact { Name = "Ibrar Mumtaz"},
                     Title = "Experimentation HTTP API",
                     Version = "v1",
                     Description = "A Rest service that provides http responses to feature string requests.",

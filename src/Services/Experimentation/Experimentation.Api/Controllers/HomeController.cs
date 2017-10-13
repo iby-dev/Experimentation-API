@@ -7,7 +7,7 @@ namespace Experimentation.Api.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return new RedirectResult("~/swagger/ui");
+            return new RedirectResult("~/swagger");
         }
     }
 }
