@@ -14,10 +14,16 @@ namespace Experimentation.Api
         {
             try
             {
-                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Prod";
-                Log.Information($"Detected environment is: {env}");
+                Log.Logger = new LoggerConfiguration()
+                    .Enrich.FromLogContext()
+                    .MinimumLevel.Debug()
+                    .WriteTo.RollingFile(new JsonFormatter(), "Logs/log-{Date}.json")
+                    .CreateLogger();
 
                 Log.Information("Firing up the experimentation api...");
+
+                var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Prod";
+                Log.Debug($"Detected environment is: {env}");
 
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
@@ -26,13 +32,6 @@ namespace Experimentation.Api
                     .AddEnvironmentVariables()
                     .Build();
 
-                Log.Logger = new LoggerConfiguration()
-                    .Enrich.FromLogContext()
-                    .MinimumLevel.Debug()
-                    .WriteTo.RollingFile(new JsonFormatter(), "Logs/log-{Date}.json")
-                    .CreateLogger();
-
-                Log.Information("Firing up the experimentation api...");
                 BuildWebHost(args, builder).Run();
             }
             catch (Exception e)
