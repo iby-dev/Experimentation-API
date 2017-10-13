@@ -57,7 +57,7 @@ namespace Experimentation.Api
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint(GetSwaggerEndpointUrl(env), "Api V1");
             });
 
             app.UseMvcWithDefaultRoute();
@@ -72,6 +72,22 @@ namespace Experimentation.Api
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+        }
+
+        private string GetSwaggerEndpointUrl(IHostingEnvironment env)
+        {
+            string swaggerDocUrl;
+            if (env.IsDevelopment())
+            {
+                swaggerDocUrl = "/swagger/v1/swagger.json";
+            }
+            else
+            {
+                swaggerDocUrl = "v1/swagger.json";
+            }
+
+            Log.Debug("Swagger endpoint url is: " + swaggerDocUrl);
+            return swaggerDocUrl;
         }
     }
 }
