@@ -14,17 +14,15 @@ namespace Experimentation.Api
         {
             try
             {
-                Log.Information("Firing up the experimentation api...");
-
                 var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Prod";
                 Log.Information($"Detected environment is: {env}");
 
-                var envFilePath = $"appsettings.{env}";
+                Log.Information("Firing up the experimentation api...");
 
                 var builder = new ConfigurationBuilder()
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                    .AddJsonFile($"appsettings.{envFilePath}.json", optional: true)
+                    .AddJsonFile($"appsettings.{env}.json", optional: true)
                     .AddEnvironmentVariables()
                     .Build();
 
@@ -40,6 +38,7 @@ namespace Experimentation.Api
             catch (Exception e)
             {
                 Log.Fatal(e, "Api  terminated unexpectedly");
+                Log.Error(e, "An error has occurred unexpectedtly.");
             }
             finally
             {
