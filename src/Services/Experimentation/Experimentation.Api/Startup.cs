@@ -1,5 +1,6 @@
 ﻿using System;
 using Experimentation.Api.Filters;
+using Experimentation.Api.Middleware;
 using Experimentation.Configuration;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -49,6 +50,17 @@ namespace Experimentation.Api
             _logFac.AddConsole(_configuration.GetSection("Logging"));
             _logFac.AddDebug();
 
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Home/Error");
+            }
+
+            app.UseMiddleware<RequestLogger>();
+
             app.UseStaticFiles();
 
             app.UseSwagger();
@@ -63,15 +75,6 @@ namespace Experimentation.Api
             app.UseMvcWithDefaultRoute();
 
             lifetime.ApplicationStopped.Register(Log.CloseAndFlush);
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
         }
 
         private string GetSwaggerEndpointUrl(IHostingEnvironment env)
