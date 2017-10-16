@@ -79,16 +79,7 @@ namespace Experimentation.Api
 
         private string GetSwaggerEndpointUrl(IHostingEnvironment env)
         {
-            string swaggerDocUrl;
-            if (env.IsDevelopment())
-            {
-                swaggerDocUrl = "/swagger/v1/swagger.json";
-            }
-            else
-            {
-                swaggerDocUrl = "v1/swagger.json";
-            }
-
+            var swaggerDocUrl = env.IsDevelopment() ? "/swagger/v1/swagger.json" : "v1/swagger.json";
             Log.Debug("Swagger endpoint url is: " + swaggerDocUrl);
             return swaggerDocUrl;
         }
