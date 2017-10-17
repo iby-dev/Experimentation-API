@@ -93,6 +93,14 @@ namespace Experimentation.Api.Controllers
             return Ok(model);
         }
 
+        /// <summary>
+        /// Retrieves a feature switch object by its name value.
+        /// </summary>
+        /// <remarks>The 'name' parameter should be a unique value like: e.g: 'NewMongoDB_Switch'. The style/convention you apply to the names
+        /// is entirely upto but consistency is key.  </remarks>
+        /// <response code="200">Requested feature switch found.</response>
+        /// <response code="404">Requested feature switch not found.</response>
+        /// <returns>a feature switch object.</returns>
         [HttpGet("name/{name}")]
         [ProducesResponseType(typeof(ViewModel<Feature>), 200)]
         [ProducesResponseType(typeof(void), 404)]
