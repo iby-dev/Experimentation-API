@@ -118,6 +118,20 @@ namespace Experimentation.Api.Controllers
             return Ok(model);
         }
 
+        /// <summary>
+        /// Adds the new feature switch to the API.
+        /// </summary>
+        /// <param name="item">The feature to add.</param>
+        /// <remarks>
+        /// The name must be a unique value that follows some naming convention for consistency purposes.
+        /// The 'friendlyId' should be a unique non-negative numeric value like: e.g: 1
+        /// The bucketList can be left to empty which will default the behaviour = for all users.
+        /// Otherwise provide an string based ID for a guided feature switch.
+        /// </remarks>
+        /// <response code="201">Feature switch created.</response>
+        /// <response code="400">Invalid name or friendlyId provided for feature switch.</response>
+        /// <response code="500">Internal server error.</response>
+        /// <returns>a confirmation of the newly added feature switch.</returns>
         [HttpPost]
         [ProducesResponseType(typeof(Feature), 201)]
         [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
