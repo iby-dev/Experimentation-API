@@ -29,6 +29,13 @@ namespace Experimentation.Api.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Retrieves all available features switches found in the API.
+        /// </summary>
+        /// <remarks>A simple sure fire way of finding out what is inside the api - use this endpoint when administering the API.
+        /// As it reveals feature switch names and ids.</remarks>
+        /// <reponse code="200">Request processed successfully.</reponse>
+        /// <returns>a list of feature switches.</returns>
         [HttpGet("")]
         [ProducesResponseType(typeof(ListViewModel<Feature>), 200)]
         public async Task<IActionResult> GetAllFeatures()
