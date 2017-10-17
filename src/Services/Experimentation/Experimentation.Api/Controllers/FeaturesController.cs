@@ -70,6 +70,13 @@ namespace Experimentation.Api.Controllers
             return Ok(model);
         }
 
+        /// <summary>
+        /// Retrieves a feature switch object by its friendly ID value.
+        /// </summary>
+        /// <remarks>The 'friendlyId' parameter should be a unique non-negative numeric value like: e.g: 1 </remarks>
+        /// <response code="200">Requested feature switch found.</response>
+        /// <response code="404">Requested feature switch not found.</response>
+        /// <returns>a feature switch object.</returns>
         [HttpGet("{friendlyId:int}")]
         [ProducesResponseType(typeof(ViewModel<Feature>), 200)]
         [ProducesResponseType(typeof(void), 404)]
