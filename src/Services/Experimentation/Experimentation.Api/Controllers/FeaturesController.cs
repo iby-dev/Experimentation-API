@@ -35,7 +35,7 @@ namespace Experimentation.Api.Controllers
         /// <remarks>A simple sure fire way of finding out what is inside the api - use this endpoint when administering the API.
         /// As it reveals feature switch names and ids. Go ahead and hit the 'Try it Out' button' - there are no parameters required for this
         /// action method.</remarks>
-        /// <reponse code="200">Request processed successfully.</reponse>
+        /// <response code="200">Request processed successfully.</response>
         /// <returns>a list of feature switches.</returns>
         [HttpGet("")]
         [ProducesResponseType(typeof(ListViewModel<Feature>), 200)]
