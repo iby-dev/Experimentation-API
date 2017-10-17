@@ -109,7 +109,17 @@ namespace Experimentation.Api.Controllers
                 ModelState.AddModelError(e.GetType().Name, e.Message);
                 _logger.LogError($"{title} - {message}", e);
                 _logger.LogError(e, "");
-                return StatusCode(500, "Internal Server Error - See server logs for more info.");
+                return BadRequest(ModelState);
+            }
+            catch (Exception e)
+            {
+                const string title = "SaveError";
+                const string message = "Internal Server Error - See server logs for more info.";
+
+                ModelState.AddModelError(e.GetType().Name, e.Message);
+                _logger.LogError($"{title} - {message}", e);
+                _logger.LogError(e, "");
+                return StatusCode(500, message);
             }
         }
 
