@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
-using Experimentation.Api.Filters;
 using Experimentation.Domain.Entities;
 using Experimentation.Domain.Exceptions;
 using Experimentation.Logic.Directors;
