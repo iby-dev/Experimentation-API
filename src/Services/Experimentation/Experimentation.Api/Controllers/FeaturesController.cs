@@ -228,10 +228,22 @@ namespace Experimentation.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Deletes the feature switch from the API.
+        /// </summary>
+        /// <param name="id">The ID of the switch to delete.</param>
+        /// <returns>No Content Result when successful.</returns>
+        /// <remarks>When deleting feature switches from the API simply provide the unique ID of the switch to this action method
+        /// and the API will do the rest.
+        /// 
+        /// The 'Id' must be an existing id otherwise a 404 status code will be returned.</remarks>
+        /// <response code="204">Feature switch deleted succesfully.</response>
+        /// <response code="404">Feature switch not found.</response>
+        /// <response code="500">Internal server error, the api has been unsuccesful in deleting the feature switch.</response>
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(void), 404)]
         [ProducesResponseType(typeof(void), 204)]
-        [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
+        [ProducesResponseType(typeof(void), 404)]
+        [ProducesResponseType(typeof(void), 500)]
         public async Task<IActionResult> DeleteFeature(
             [Required(AllowEmptyStrings = false, ErrorMessage = "The name parameter cannot be null or contain whitespace.")]
             string id)
@@ -255,7 +267,7 @@ namespace Experimentation.Api.Controllers
                 ModelState.AddModelError(title, message);
 
                 _logger.LogError($"{title} - {message}", e);
-                return BadRequest(ModelState);
+                return StatusCode(500, message); 
             }
         }
 
