@@ -167,10 +167,29 @@ namespace Experimentation.Api.Controllers
             }
         }
 
+        /// <summary>
+        /// Updates the existing feature switch in the API.
+        /// </summary>
+        /// <param name="model">The feature switch to update.</param>
+        /// <returns>A confirmation message.</returns>
+        /// <remarks> When updating an existing switch then all fields are updated into the database apart from
+        /// the ID field. This field is unique and after being generated it cannot be re-assigned or updated.
+        /// 
+        /// The 'Id' must be an existing id otherwise a 404 status code will be returned.
+        /// Change the name field to a unique value.
+        /// Change the 'friendlyId' to unique non-negative numeric value.
+        /// The bucketList can be left to empty which will default the behaviour = for all users.
+        /// Otherwise provide an string based identifier for a guided feature switch.
+        /// </remarks>
+        /// <response code="200">Feature switch updated.</response>
+        /// <response code="404">Feature switch not found.</response>
+        /// <response code="400">Invalid name or friendlyId provided for feature switch.</response>
+        /// <response code="500">Internal Server Error.</response>
         [HttpPut("")]
-        [ProducesResponseType(typeof(void), 404)]
         [ProducesResponseType(typeof(string), 200)]
         [ProducesResponseType(typeof(IDictionary<string, string>), 400)]
+        [ProducesResponseType(typeof(void), 404)]
+        [ProducesResponseType(typeof(string), 500)]
         public async Task<IActionResult> UpdateExistingFeature([FromBody] FeatureViewModel model)
         {
             try
@@ -188,15 +207,25 @@ namespace Experimentation.Api.Controllers
                 await _director.UpdateFeature(existingFeature);
                 return new OkObjectResult("Request processed successfully");
             }
-            catch (Exception e)
+            catch (NonUniqueValueDetectedException e)
             {
                 const string title = "UpdateError";
                 var message = $"The api was unable to update entity with id: {model.Id}";
 
-                ModelState.AddModelError(title, message);
-
+                ModelState.AddModelError(e.GetType().Name, e.Message);
                 _logger.LogError($"{title} - {message}", e);
+                _logger.LogError(e, "");
                 return BadRequest(ModelState);
+            }
+            catch (Exception e)
+            {
+                const string title = "UpdateError";
+                const string message = "Internal Server Error - See server logs for more info.";
+
+                ModelState.AddModelError(e.GetType().Name, e.Message);
+                _logger.LogError($"{title} - {message}", e);
+                _logger.LogError(e, "");
+                return StatusCode(500, message);
             }
         }
 

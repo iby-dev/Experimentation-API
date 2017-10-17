@@ -60,6 +60,18 @@ namespace Experimentation.Persistence.Repositories
                 throw new ArgumentNullException($"{nameof(entity.Id)}", "The given entity does not have an id set on it.");
             }
 
+            var isUniqueId = Collection.Count(item => item.FriendlyId == entity.FriendlyId);
+            if (isUniqueId > 0)
+            {
+                throw new NonUniqueValueDetectedException(GetType().FullName, entity.FriendlyId.ToString());
+            }
+
+            var isUniqueName = Collection.Count(item => item.Name == entity.Name);
+            if (isUniqueName > 0)
+            {
+                throw new NonUniqueValueDetectedException(GetType().FullName, entity.Name);
+            }
+
             await Save(entity);
         }
 
