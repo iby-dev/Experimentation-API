@@ -21,6 +21,12 @@ namespace Experimentation.Persistence.Repositories
             return await Retry(async () => await Collection.Find(x => x.Id.Equals(id)).FirstOrDefaultAsync());
         }
 
+        public virtual async Task<bool> Exists(string id)
+        {
+            var count =  await Retry(async () => await Collection.CountAsync(x => x.Id.Equals(id)));
+            return count > 0;
+        }
+
         public virtual async Task<TEntity> GetByFriendlyIdAsync(int id)
         {
             return await Retry(async () => await Collection.Find(x => x.FriendlyId.Equals(id)).FirstOrDefaultAsync());

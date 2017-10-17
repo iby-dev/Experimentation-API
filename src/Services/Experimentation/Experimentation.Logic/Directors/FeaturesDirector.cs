@@ -24,6 +24,11 @@ namespace Experimentation.Logic.Directors
             return _repository.GetByIdAsync(id);
         }
 
+        public Task<bool> FeatureExistsById(string id)
+        {
+            return _repository.Exists(id);
+        }
+
         public Task<Feature> GetFeatureByName(string name)
         {
             return _repository.GetByNameAsync(name);

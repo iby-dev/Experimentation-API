@@ -8,6 +8,7 @@ namespace Experimentation.Logic.Directors
     {
         Task<IEnumerable<Feature>> GetAllFeatures();
         Task<Feature> GetFeatureById(string id);
+        Task<bool> FeatureExistsById(string id);
         Task<Feature> AddNewFeature(Feature toAdd);
         Task<Feature> GetFeatureByFriendlyId(int id);
         Task UpdateFeature(Feature toUpdate);

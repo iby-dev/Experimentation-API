@@ -166,6 +166,12 @@ namespace Experimentation.Api.Controllers
         {
             try
             {
+                var result = await _director.FeatureExistsById(id);
+                if (result == false)
+                {
+                    return NotFound();
+                }
+
                 await _director.DeleteFeature(id);
                 return new NoContentResult();
             }
