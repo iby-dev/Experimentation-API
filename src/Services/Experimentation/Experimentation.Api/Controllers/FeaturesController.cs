@@ -46,6 +46,13 @@ namespace Experimentation.Api.Controllers
             return Ok(model);
         }
 
+        /// <summary>
+        /// Retrieves a feature switch object by its ID value.
+        /// </summary>
+        /// <remarks>The 'ID' parameter should be like: e.g: 59e4c8190b637e1524aea56f</remarks>
+        /// <response code="200">Requested feature switch found.</response>
+        /// <response code="404">Requested feature switch not found.</response>
+        /// <returns>a feature switch object.</returns>
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(ViewModel<Feature>), 200)]
         [ProducesResponseType(typeof(void), 404)]
