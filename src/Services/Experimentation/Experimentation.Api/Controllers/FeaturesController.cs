@@ -289,7 +289,7 @@ namespace Experimentation.Api.Controllers
         [HttpGet("{id}/bucket/{bucketId}")]
         [ProducesResponseType(typeof(void), 404)]
         [ProducesResponseType(typeof(bool), 200)]
-        public async Task<IActionResult> QueryFeatureByBucket(string id, string bucketId)
+        public async Task<IActionResult> QueryFeatureBucketByFeatureId(string id, string bucketId)
         {
             var feature = await _director.GetFeatureById(id);
             if (feature == null)
