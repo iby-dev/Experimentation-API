@@ -349,9 +349,17 @@ namespace Experimentation.Api.Controllers
             return new OkObjectResult("Request processed successfully");
         }
 
+        /// <summary>
+        /// Removes the identifier from the feature switches bucket list.
+        /// </summary>
+        /// <param name="id">The id of the feature switch to retrieve.</param>
+        /// <param name="bucketId">The bucket id to remove from the bucket.</param>
+        /// <returns>a status message based on request outcome.</returns>
+        /// <response code="200">Bucket list updated successfully.</response>
+        /// <response code="404">Feature switch not found.</response>
         [HttpDelete("{id}/bucket/{bucketId}")]
-        [ProducesResponseType(typeof(void), 404)]
         [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(void), 404)]
         public async Task<IActionResult> RemoveIdFromFeatureBucket(string id, string bucketId)
         {
             var feature = await _director.GetFeatureById(id);
