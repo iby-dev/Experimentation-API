@@ -300,6 +300,9 @@ namespace Experimentation.Api.Controllers
         /// <param name="id">The Id of feature switch to retrieve.</param>
         /// <param name="bucketId">The bucketId to query for.</param>
         /// <returns>A true or false value if bucketId exists on bucket list.</returns>
+        /// <remarks>The 'Id' must be of an existing id otherwise a 404 status code will be returned.
+        /// the 'bucketId' is a string based identifier that will get added to the bucket list on the feature switch. Semantically this means
+        /// the switch is now buided by the identifiers found only on the list.</remarks>
         /// <response code="200">Bucket list queried successfully.</response>
         /// <response code="404">Feature switch not found.</response>
         [HttpGet("{id}/bucket/{bucketId}")]
