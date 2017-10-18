@@ -294,9 +294,17 @@ namespace Experimentation.Api.Controllers
             return new OkObjectResult(feature.BucketList);
         }
 
+        /// <summary>
+        /// Returns true or false if specified bucketId is contained on bucket list found on feature switch.
+        /// </summary>
+        /// <param name="id">The Id of feature switch to retrieve.</param>
+        /// <param name="bucketId">The bucketId to query for.</param>
+        /// <returns>A true or false value if bucketId exists on bucket list.</returns>
+        /// <response code="200">Bucket list queried successfully.</response>
+        /// <response code="404">Feature switch not found.</response>
         [HttpGet("{id}/bucket/{bucketId}")]
-        [ProducesResponseType(typeof(void), 404)]
         [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(typeof(void), 404)]
         public async Task<IActionResult> QueryFeatureBucketByFeatureId(string id, string bucketId)
         {
             var feature = await _director.GetFeatureById(id);
