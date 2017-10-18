@@ -272,10 +272,18 @@ namespace Experimentation.Api.Controllers
         }
 
         // BUCKETS CRUD METHODS
+        /// <summary>
+        /// Get the bucket list on a feature by the feature Id.
+        /// </summary>
+        /// <param name="id">The ID of the switch to retrieve.</param>
+        /// <returns>a list of bucket ids.</returns>
+        /// <remarks>The 'Id' must be of an existing id otherwise a 404 status code will be returned.</remarks>
+        /// <response code="200">Bucket list retrieved successfully.</response>
+        /// <response code="404">Feature switch not found.</response>
         [HttpGet("{id}/bucket")]
-        [ProducesResponseType(typeof(void), 404)]
         [ProducesResponseType(typeof(List<string>), 200)]
-        public async Task<IActionResult> QueryFeatureByBucket(string id)
+        [ProducesResponseType(typeof(void), 404)]
+        public async Task<IActionResult> GetBucketByFeatureId(string id)
         {
             var feature = await _director.GetFeatureById(id);
             if (feature == null)
