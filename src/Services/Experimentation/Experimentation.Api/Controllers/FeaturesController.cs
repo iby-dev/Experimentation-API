@@ -321,9 +321,20 @@ namespace Experimentation.Api.Controllers
             return new OkObjectResult(result);
         }
 
+        /// <summary>
+        /// Adds the identifier to the feature switches bucket list.
+        /// </summary>
+        /// <param name="id">The feature switch id to retrieve.</param>
+        /// <param name="bucketId">The bucket identifier to add to the bucket.</param>
+        /// <returns>a status message based on request outcome.</returns>
+        /// <remarks>The 'Id' must be of an existing id otherwise a 404 status code will be returned.
+        /// the 'bucketId' is a string based identifier that will get added to the bucket list on the feature switch. Semantically this means
+        /// the switch is now buided by the identifiers found only on the list.</remarks>
+        /// <response code="200">Bucket list updated successfully.</response>
+        /// <response code="404">Feature switch not found.</response>
         [HttpPut("{id}/bucket/{bucketId}")]
-        [ProducesResponseType(typeof(void), 404)]
         [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(void), 404)]
         public async Task<IActionResult> AddIdToFeatureBucket(string id, string bucketId)
         {
             var feature = await _director.GetFeatureById(id);
