@@ -10,6 +10,7 @@
     <DefineConstants>TRACE;DEBUG</DefineConstants>
     <OutputPath>bin\Debug\</OutputPath>
     <DocumentationFile>bin\Debug\netcoreapp2.0\Experimentation.Api.xml</DocumentationFile>
+    <NoWarn>1591;1701;1702;1705;</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
