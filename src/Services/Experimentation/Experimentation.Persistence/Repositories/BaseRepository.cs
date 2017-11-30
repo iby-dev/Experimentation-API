@@ -60,16 +60,23 @@ namespace Experimentation.Persistence.Repositories
                 throw new ArgumentNullException($"{nameof(entity.Id)}", "The given entity does not have an id set on it.");
             }
 
-            var isUniqueId = Collection.Count(item => item.FriendlyId == entity.FriendlyId);
-            if (isUniqueId > 0)
+            var original = await Collection.Find(x => x.Id.Equals(entity.Id)).FirstOrDefaultAsync();
+            if (original.FriendlyId != entity.FriendlyId) // Friendly id has changed from original.
             {
-                throw new NonUniqueValueDetectedException(GetType().FullName, entity.FriendlyId.ToString());
+                var isUniqueId = Collection.Count(item => item.FriendlyId == entity.FriendlyId);
+                if (isUniqueId > 0)
+                {
+                    throw new NonUniqueValueDetectedException(GetType().FullName, entity.FriendlyId.ToString());
+                }
             }
 
-            var isUniqueName = Collection.Count(item => item.Name == entity.Name);
-            if (isUniqueName > 0)
+            if (original.Name != entity.Name) // name has changed from original.
             {
-                throw new NonUniqueValueDetectedException(GetType().FullName, entity.Name);
+                var isUniqueName = Collection.Count(item => item.Name == entity.Name);
+                if (isUniqueName > 0)
+                {
+                    throw new NonUniqueValueDetectedException(GetType().FullName, entity.Name);
+                }
             }
 
             await Save(entity);
